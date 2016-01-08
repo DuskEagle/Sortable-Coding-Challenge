@@ -1,9 +1,14 @@
+from Normalizer import *
+
 class Product:
     
-    def __init__(self, product_json):
-        self.product_name = product_json["product_name"]
-        self.manufacturer = product_json["manufacturer"]
-        self.family = product_json.get("family", None)
-        self.model = product_json["model"]
-        self.announced_date = product_json["announced-date"]
+    def __init__(self, json):
+        """ json is a Pyhton dictionary made from calling json.loads()
+        on a JSON string """
+        self.json = json
+        self.product_name = genericNormalizer(json["product_name"])
+        self.manufacturer = manufacturerNormalizer(json["manufacturer"])
+        self.family = genericNormalizer(json.get("family", ""))
+        self.model = genericNormalizer(json["model"])
+        self.announced_date = json["announced-date"]
     
