@@ -19,10 +19,10 @@ class Product:
         self.family = genericNormalizer(obj.get("family", ""))
         
         self.model = genericNormalizer(obj["model"])
-        self.model_regex = self.__makeModelRegex__()
+        self.model_regex = self.__makeModelRegex()
         self.announced_date = obj["announced-date"]
     
-    def __makeModelRegex__(self):
+    def __makeModelRegex(self):
         regex_builder = []
         for i in range(len(self.model)):
             letter = self.model[i]
