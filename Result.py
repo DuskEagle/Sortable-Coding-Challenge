@@ -14,5 +14,5 @@ class Result:
         """ We use an OrderedDict here to ensure product_name comes first in the
         JSON output, which is nicer to read for people."""
         return json.dumps(OrderedDict([("product_name", self.product.product_name),
-                                       ("listings", [listing.json for listing in self.listings])]))
+                                       ("listings", [listing.obj for listing in self.listings])]))
 

@@ -1,0 +1,2 @@
+class MultipleProductsMatchedException(Exception):
+    pass
