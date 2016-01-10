@@ -39,7 +39,11 @@ class Product:
                 regex_builder.append(letter + "[ -]?")
             else:
                 regex_builder.append(letter)
-        return re.compile("\\b" + "".join(regex_builder)  + "\\b")
+        
+        """ We originally used \b, but that broke for model names that ended in a
+        "non-word" character, such as ')'. So we do it this way instead. """
+        punctuation = "[ ,;\\.]"
+        return re.compile("(^|" + punctuation + ")" + "".join(regex_builder)  + "(" + punctuation + "|$)")
     
     
     

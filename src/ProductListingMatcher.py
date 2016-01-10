@@ -18,14 +18,20 @@ class ProductListingMatcher:
         self.__product_listing_dict = defaultdict(list)
     
     def match(self):
-        self.__loadProducts()
-        self.__matchListings()
+        products_strings = self.__loadFromFile(self.__products_filename)
+        self.__loadProducts(products_strings)
+        listings_strings = self._loadFromFile(self.__listings_filename)
+        self.__matchListings(listings_strings)
         self.__writeResults()
     
-    def __loadProducts(self):
-        products_file = open(self.__products_filename)
-        products_strings = products_file.read().splitlines()
-        products_file.close()
+    def __loadFromFile(self, filename):
+        fp = open(filename)
+        strings = fp.read().splitlines()
+        fp.close()
+        return strings
+        
+    
+    def __loadProducts(self, products_strings):
         
         for product_string in products_strings:
             product = Product(json.loads(product_string))
@@ -35,10 +41,7 @@ class ProductListingMatcher:
 
         self.__manufacturer_model_pairs = self.__product_dict.keys()
 
-    def __matchListings(self):
-        listings_file = open(self.__listings_filename)
-        listings_strings = listings_file.read().splitlines()
-        listings_file.close()
+    def __matchListings(self, listings_strings):
         
         for listing_string in listings_strings:
             
