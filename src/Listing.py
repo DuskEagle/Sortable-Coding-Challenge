@@ -2,7 +2,7 @@ from Normalizer import *
 
 class Listing:
     def __init__(self, obj):
-        """ obj is a Pyhton dictionary made from calling json.loads()
+        """ obj is a Python dictionary made from calling json.loads()
         on a JSON string """
         self.obj = obj
         self.title = genericNormalizer(obj["title"])

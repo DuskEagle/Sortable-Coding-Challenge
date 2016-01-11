@@ -20,7 +20,7 @@ class ProductListingMatcher:
     def match(self):
         products_strings = self.__loadFromFile(self.__products_filename)
         self.__loadProducts(products_strings)
-        listings_strings = self._loadFromFile(self.__listings_filename)
+        listings_strings = self.__loadFromFile(self.__listings_filename)
         self.__matchListings(listings_strings)
         self.__writeResults()
     
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     elif len(sys.argv) == 4:
         products_filename, listings_filename, results_filename = sys.argv[1:4]
     else:
-        print("Usage: " + sys.argv[0] + " [products_file, listings_file, results_file]")
+        print("Usage: python " + sys.argv[0] + " [products_file, listings_file, results_file]")
         sys.exit()
     
     matcher = ProductListingMatcher(products_filename, listings_filename, results_filename)

@@ -23,6 +23,10 @@ class Product:
         self.announced_date = obj["announced-date"]
     
     def __makeModelRegex(self):
+        """ Return a regular expression object based off of self.model which can
+        be used to find approximate instances of 'model' in a string of text,
+        such as a listing title. """
+        
         regex_builder = []
         for i in range(len(self.model)):
             letter = self.model[i]
