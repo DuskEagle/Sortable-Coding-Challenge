@@ -45,8 +45,10 @@ class Product:
                 regex_builder.append(letter)
         
         """ We originally used \b, but that broke for model names that ended in a
-        "non-word" character, such as ')'. So we do it this way instead. """
-        punctuation = "[ ,;\\.]"
+        "non-word" character, such as ')'. So we do it this way instead. We're not
+        using strings.punctuation because that has too many characters, some of which
+        we don't want to check for."""
+        punctuation = "[ ,;\\.\\(\\)\\/]"
         return re.compile("(^|" + punctuation + ")" + "".join(regex_builder)  + "(" + punctuation + "|$)")
     
     
