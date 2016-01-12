@@ -52,12 +52,18 @@ class RegexMatchingTest(unittest.TestCase):
         listing = """{"title":"Casio QV-3000 Extra Special Dealz","manufacturer":"Casio","currency":"CAD","price":"0.00"}"""
         self.__testListingMatched(product, listing, should_match=False)
     
-    def testAccessoryListingNotMatched(self):
+    def testAccessoryListingForMultipleProductsNotMatched(self):
         """ We shouldn't match if a listing appears to match multiple products. """
         products = ["""{"product_name":"Nikon_D3000","manufacturer":"Nikon","model":"D3000","announced-date":"2009-07-29T20:00:00.000-04:00"}""",
                    """{"product_name":"Nikon_D5000","manufacturer":"Nikon","model":"D5000","announced-date":"2009-04-13T20:00:00.000-04:00"}"""]
         listing = """{"title":"Nikon EN-EL9a 1080mAh Ultra High Capacity Li-ion Battery Pack for Nikon D40, D40x, D60, D3000, & D5000 Digital SLR Cameras","manufacturer":"Nikon","currency":"CAD","price":"29.75"}"""
         self.__testListingMatched(products, listing, should_match=False)
         
-        
+    def testAccessoryWithForInTitleNotMatched(self):
+        """ A listing with the word "for" (or a translation thereof, such as "pour"
+        the title should not be matched with any models listed after the first
+        instance of that word. """
+        product = """{"title":"Panasonic Batterie Original pour PANASONIC LUMIX DMC-TZ10 - offre de LOOKit® Expédié depuis Allemagne","manufacturer":"Panasonic","currency":"EUR","price":"44.95"}"""
+        listing = """{"product_name":"Panasonic_Lumix_DMC-TZ10","manufacturer":"Panasonic","model":"DMC-TZ10","family":"Lumix","announced-date":"2010-01-25T19:00:00.000-05:00"}"""
+
         
